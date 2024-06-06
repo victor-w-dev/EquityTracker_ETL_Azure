@@ -1,10 +1,12 @@
 ## Project Overview
 This project demonstrates a comprehensive ETL pipeline leveraging various Azure services for an equity tracking report system, including followings:
-1. Azure Virtual Machine (VM)
+<!--ts-->
+[1. Azure Virtual Machine (VM)](#Azure-Virtual-Machine-(VM))<br>
 2. Azure Data Factory (ADF)
 3. Azure Data Lake Storage (ADLS) Gen2
 4. Databricks
 5. Azure Logic Apps
+<!--te-->
 
 ## Architecture
 <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/project_architecture.PNG" width="90%" height="90%"><br>
