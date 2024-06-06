@@ -1,7 +1,7 @@
 ## Project Overview
 This project demonstrates a comprehensive ETL pipeline leveraging various Azure services for an equity tracking report system, including followings:
 <!--ts-->
-[1. Azure Virtual Machine (VM)](#Azure-Virtual-Machine-(VM))<br>
+[1. Azure Virtual Machine (VM)](#Azure-VM)<br>
 2. Azure Data Factory (ADF)
 3. Azure Data Lake Storage (ADLS) Gen2
 4. Databricks
@@ -12,7 +12,7 @@ This project demonstrates a comprehensive ETL pipeline leveraging various Azure 
 <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/project_architecture.PNG" width="90%" height="90%"><br>
 <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/adf_pipeline_structure.PNG" width="90%" height="90%"><br>
 
-### Azure Virtual Machine (VM)
+### Azure VM
 - Purpose: Hosts the data collection and processing application.
 - Log Generation: Generates log files for daily equity tracking reports, saved in a folder on the VM. Log files are named by date (e.g., 20240601.log).
 - Log Frequency: Four new log files are created daily at UTC 00:00, corresponding to different equity tracking strategies. <br>
