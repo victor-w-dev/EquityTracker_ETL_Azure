@@ -3,9 +3,9 @@ This project demonstrates a comprehensive ETL pipeline leveraging various Azure 
 <!--ts-->
 [1. Azure Virtual Machine (VM)](#Azure-VM)<br>
 [2. Azure Data Factory (ADF)](#Azure-Data-Factory-(ADF))<br>
-3. Azure Data Lake Storage (ADLS) Gen2
-4. Databricks
-5. Azure Logic Apps
+[3. Azure Data Lake Storage (ADLS) Gen2](#Azure-Data-Lake-Storage-Gen2-(ADLS))<br>
+[4. Databricks](#Databricks)<br>
+[5. Azure Logic Apps])(#Azure-Logic-App)<br>
 <!--te-->
 
 ## Architecture
