@@ -7,6 +7,8 @@ This project demonstrates a comprehensive ETL pipeline leveraging various Azure 
 5. Azure Logic Apps
 
 ## Architecture
+<img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/project_architecture.PNG" width="80%" height="80%"><br>
+
 ### Azure Virtual Machine (VM)
 - Purpose: Hosts the data collection and processing application.
 - Log Generation: Generates log files for daily equity tracking reports, saved in a folder on the VM. Log files are named by date (e.g., 20240601.log).
