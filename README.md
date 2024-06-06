@@ -8,7 +8,7 @@ This project demonstrates a comprehensive ETL pipeline leveraging various Azure 
 
 ## Architecture
 <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/project_architecture.PNG" width="90%" height="90%"><br>
-<p align="center"><img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/adf_pipeline_structure.PNG" width="70%" height="70%"></p><br>
+<img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/adf_pipeline_structure.PNG" width="90%" height="90%"><br>
 
 ### Azure Virtual Machine (VM)
 - Purpose: Hosts the data collection and processing application.
