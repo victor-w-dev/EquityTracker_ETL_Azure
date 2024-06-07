@@ -1,3 +1,5 @@
+[ADF Pipeline Setup]: #adf-pipeline-setup "ADF Pipeline Setup"
+
 ## Project Overview
 This project demonstrates an equity tracking system leveraging Azure Data Factory ETL pipeline to load trading activity log data incrementally from Azure VM through Azure Data Lake Storage (ADLS) Gen2 to DataBricks Lakehouse Platform, using Azure Logic Apps for email notification.
 
@@ -44,7 +46,7 @@ What we’ll cover:
     <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/adf_linked_services.PNG" width="50%" height="50%"><br>
 - Integration Runtime: Connects to the VM, ADLS, and Databricks.<br>
   <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/adf_IR.PNG" width="50%" height="50%"><br>
-- [Pipeline Setup](#ADF-Pipeline-Setup)<br>: Automates the process of copying and transforming log files.
+- [Pipeline Setup][ADF Pipeline Setup]: Automates the process of copying and transforming log files.
   - Copy Activity: Copies files from the VM to ADLS.
   - Databricks Activity: Processes data for incremental ingestion into a notebook.
   - Web Activity: Integrates with Azure Logic Apps to send email notifications upon successful or failed pipeline runs.
