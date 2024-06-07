@@ -28,7 +28,8 @@ What we’ll cover:
   - Step 2: Download and install the Integration Runtime on the Azure VM.
   - Step 3: Configure the Integration Runtime to connect to Azure Data Factory using the provided key.
   - Step 4: Verify the setup by testing the connection between the Integration Runtime and Azure Data Factory.
-  - reference: [Create a self-hosted integration runtime - Azure Data Factory & Azure Synapse | Microsoft Learn](https://learn.microsoft.com/en-us/azure/data-factory/create-self-hosted-integration-runtime?tabs=data-factory)
+  - reference: 
+    - [Create a self-hosted integration runtime - Azure Data Factory & Azure Synapse | Microsoft Learn](https://learn.microsoft.com/en-us/azure/data-factory/create-self-hosted-integration-runtime?tabs=data-factory)
 ### Azure Data Factory (ADF)
 - Dataset and Linked Services Setup:
   - Datasets: Define the structure of data to be used in the pipeline.
@@ -63,3 +64,6 @@ What we’ll cover:
 ### Azure Logic App
 - Notification: Sends email notifications upon successful or failed ADF pipeline runs.
 - Integration: Uses a web activity in ADF to trigger the Logic App.
+- reference:
+  - [Copy data and send email notifications on success and failure | Microsoft Learn](https://learn.microsoft.com/en-us/azure/data-factory/tutorial-control-flow-portal)
+  - [Send an email with an Azure Data Factory or Azure Synapse pipeline | Microsoft Learn](https://learn.microsoft.com/en-us/azure/data-factory/tutorial-control-flow-portal)
