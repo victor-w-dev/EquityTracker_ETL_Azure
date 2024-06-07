@@ -64,10 +64,14 @@
   <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/adf_triggers.PNG" width="35%" height="35%"><br>
 ### Azure Data Lake Storage Gen2 (ADLS)
 - **Purpose:** Stores the log files and acts as the primary data lake.
-- **Storing Location:** log files are stored in a hierarchical structure from low cardinality to high cardinality (path: account/year/month).
+- **Storing Location:** log files are stored in a hierarchical structure from low cardinality to high cardinality (path: account/year/month).<br>
   <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/adls.PNG" width="70%" height="70%"><br>
 ### Databricks
-- **Notebook:** refer to 
+- **Notebook:** refer to:
+  - recommend to download the html and drag to browser to view as it can retains Databrick format style: 
+    - [demo_equitytracking_notebook(.html)](https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/demo_equitytracking_notebook.html)<br>
+    <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/databrick_html_view.PNG" width="35%" height="35%"><br>
+  - [demo_equitytracking_notebook(.ipynb)](https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/demo_equitytracking_notebook.ipynb) 
 - **Mounting ADLS:** Uses a service principal to mount the ADLS folder, managed by Databricks File System (DBFS).
   - reference:
     - [Connect to Azure Data Lake Storage Gen2 or Blob Storage using Azure credentials | Microsoft Learn](https://learn.microsoft.com/en-us/azure/databricks/connect/storage/azure-storage#--connect-to-azure-data-lake-storage-gen2-or-blob-storage-using-azure-credentials)
@@ -169,6 +173,9 @@
     WHERE date_end >= '2024-05-09'
     ```
     <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/plot.PNG" width="50%" height="50%"><br>
+- **DBFS:**
+  - The delta tables created previously will be managed under DBFS<br>
+  <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/dbfs.PNG" width="60%" height="60%"><br>   
 ### Azure Logic App
 - **Notification:** Sends email notifications upon successful or failed ADF Pipeline runs.
 - **Integration:** Uses a web activity in ADF to trigger the Logic App.<br>
