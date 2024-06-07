@@ -8,6 +8,7 @@ What we’ll cover:
 - Step 3: Through the Multi-hop architecture approach, Databricks finalized a delta table for simple visulization for equity tracking.
 - Step 4: Set a Web activity leveraging Azure Logic Apps to send email, noticing the Pipeline run successfully or fail
 <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/project_architecture.PNG" width="90%" height="90%"><br>
+- ADF Pipeline Setup:
 <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/adf_pipeline_structure.PNG" width="90%" height="90%"><br>
 
 ## Prerequisites
@@ -34,16 +35,20 @@ What we’ll cover:
 - Dataset and Linked Services Setup:
   - Datasets: Define the structure of data to be used in the pipeline.
     - VM Dataset: Represents log files stored on the VM.
-    - ADLS Dataset: Represents log files stored in ADLS.
+    - ADLS Dataset: Represents log files stored in ADLS.<br>
+    <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/adf_dataset.PNG" width="30%" height="30%"><br>
   - Linked Services: Configure connections to the VM, ADLS, and Databricks.
     - VM Linked Service: Connects ADF to the Azure VM.
     - ADLS Linked Service: Connects ADF to Azure Data Lake Storage.
-    - Databricks Linked Service: Connects ADF to Databricks.
-- Integration Runtime: Connects to the VM, ADLS, and Databricks.
-- Pipeline Setup: Automates the process of copying log files from the VM to ADLS.
+    - Databricks Linked Service: Connects ADF to Databricks.<br>
+    <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/adf_linked_services.PNG" width="50%" height="50%"><br>
+- Integration Runtime: Connects to the VM, ADLS, and Databricks.<br>
+  <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/adf_IR.PNG" width="50%" height="50%"><br>
+- [Pipeline Setup](#ADF-Pipeline-Setup)<br>: Automates the process of copying and transforming log files.
   - Copy Activity: Copies files from the VM to ADLS.
   - Databricks Activity: Processes data for incremental ingestion into a notebook.
   - Web Activity: Integrates with Azure Logic Apps to send email notifications upon successful or failed pipeline runs.
+  
 ### Azure Data Lake Storage Gen2 (ADLS)
 - Purpose: Stores the log files and acts as the primary data lake.
 ### Databricks
