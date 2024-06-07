@@ -60,10 +60,11 @@
   - Databricks Activity: Processes data for incremental ingestion into a notebook.
   - Web Activity: Integrates with Azure Logic Apps to send email notifications upon successful or failed Pipeline runs.
 - **Trigger:**
-  - Use scheduled trigger to start the pipeline at UTC time 00:10 every day
+  - Use scheduled trigger to start the pipeline at UTC time 00:10 every day<br>
+  <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/adf_triggers.PNG" width="35%" height="35%"><br>
 ### Azure Data Lake Storage Gen2 (ADLS)
 - **Purpose:** Stores the log files and acts as the primary data lake.
-- **Storing Location:** log files are stored in a hierarchical structure from low cardinality to high cardinality (account/year/month).
+- **Storing Location:** log files are stored in a hierarchical structure from low cardinality to high cardinality (path: account/year/month).
   <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/adls.PNG" width="70%" height="70%"><br>
 ### Databricks
 - **Notebook:** refer to 
