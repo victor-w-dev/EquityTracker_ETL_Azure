@@ -1,7 +1,8 @@
 [ADF Pipeline Setup]: #adf-pipeline-setup "ADF Pipeline Setup"
 
 ## Project Overview
-This project demonstrates an equity tracking system leveraging Azure Data Factory ETL pipeline to load trading activity log data incrementally from Azure VM through Azure Data Lake Storage (ADLS) Gen2 to DataBricks Lakehouse Platform, using Azure Logic Apps for email notification.
+- This project demonstrates an equity tracking system, leveraging Azure Data Factory ETL pipeline to load trading activity log data incrementally from Azure VM through Azure Data Lake Storage (ADLS) Gen2 to DataBricks Lakehouse Platform, using Azure Logic Apps for email notification.
+- Additionally, it calculates and displays the total asset amount in the trading accounts on a daily basis.
 
 ## Architecture
 What we’ll cover:
@@ -25,8 +26,10 @@ What we’ll cover:
 
 ### Azure Virtual Machine (VM)
 - Purpose: Hosts the data collection and processing application.
-- Log Generation: Generates log files for daily equity tracking reports, saved in a folder on the VM. Log files are named by date (e.g., 20240601.log).
-- Log Frequency: Four new log files are created daily at UTC 00:00, corresponding to different equity tracking strategies. <br>
+- Log Generation: Generates log files for daily equity tracking reports, saved in 4 folders on the VM. Log files are named by date (e.g., 20240606.log).<br>
+<img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/vm_log_folders.PNG" width="60%" height="60%"><br>
+<img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/vm_logs.PNG" width="60%" height="60%"><br>
+- Log Frequency: 4 new log files are created daily at UTC 00:00, corresponding to 4 different trading account.<br>
 - Integration Runtime Setup for connection with ADF:
   - Step 1: Create a Self-hosted Integration Runtime in Azure Data Factory.
   - Step 2: Download and install the Integration Runtime on the Azure VM.
@@ -54,11 +57,13 @@ What we’ll cover:
   
 ### Azure Data Lake Storage Gen2 (ADLS)
 - Purpose: Stores the log files and acts as the primary data lake.
+- Storing Location: log files are stored in a hierarchical structure from low cardinality to high cardinality (account/year/month).
+  <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/adls.PNG" width="50%" height="50%"><br>
 ### Databricks
 - Mounting ADLS: Uses a service principal to mount the ADLS folder, managed by DBFS.
-- reference:
-  - [Connect to Azure Data Lake Storage Gen2 or Blob Storage using Azure credentials | Microsoft Learn](https://learn.microsoft.com/en-us/azure/databricks/connect/storage/azure-storage#--connect-to-azure-data-lake-storage-gen2-or-blob-storage-using-azure-credentials)
-  - [Access storage using a service principal & Microsoft Entra ID(Azure Active Directory | Microsoft Learn](https://learn.microsoft.com/en-us/azure/databricks/connect/storage/aad-storage-service-principal)
+  - reference:
+    - [Connect to Azure Data Lake Storage Gen2 or Blob Storage using Azure credentials | Microsoft Learn](https://learn.microsoft.com/en-us/azure/databricks/connect/storage/azure-storage#--connect-to-azure-data-lake-storage-gen2-or-blob-storage-using-azure-credentials)
+    - [Access storage using a service principal & Microsoft Entra ID(Azure Active Directory | Microsoft Learn](https://learn.microsoft.com/en-us/azure/databricks/connect/storage/aad-storage-service-principal)
   
 - Data Processing: Processes and ingests log files into the bronze layer for further analysis.
 - Multi-Hop Architecture: 
