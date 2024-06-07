@@ -28,18 +28,42 @@ What we’ll cover:
   - Step 2: Download and install the Integration Runtime on the Azure VM.
   - Step 3: Configure the Integration Runtime to connect to Azure Data Factory using the provided key.
   - Step 4: Verify the setup by testing the connection between the Integration Runtime and Azure Data Factory.
-  - reference: [Create a self-hosted integration runtime - Azure Data Factory & Azure Synapse | Microsoft Learn](https://learn.microsoft.com/en-us/azure/data-factory/create-self-hosted-integration-runtime?tabs=data-factory)
+  - reference: 
+    - [Create a self-hosted integration runtime - Azure Data Factory & Azure Synapse | Microsoft Learn](https://learn.microsoft.com/en-us/azure/data-factory/create-self-hosted-integration-runtime?tabs=data-factory)
 ### Azure Data Factory (ADF)
+- Dataset and Linked Services Setup:
+  - Datasets: Define the structure of data to be used in the pipeline.
+    - VM Dataset: Represents log files stored on the VM.
+    - ADLS Dataset: Represents log files stored in ADLS.
+  - Linked Services: Configure connections to the VM, ADLS, and Databricks.
+    - VM Linked Service: Connects ADF to the Azure VM.
+    - ADLS Linked Service: Connects ADF to Azure Data Lake Storage.
+    - Databricks Linked Service: Connects ADF to Databricks.
 - Integration Runtime: Connects to the VM, ADLS, and Databricks.
-- Pipeline: Automates the process of copying log files from the VM to ADLS.
-- Step 1: Copy files from the VM to ADLS.
-- Step 2: Databricks activity for incremental ingestion into a bronze layer.
-- Monitoring and Notification: Integrates with Azure Logic Apps to send email notifications upon successful or failed pipeline runs.
+- Pipeline Setup: Automates the process of copying log files from the VM to ADLS.
+  - Copy Activity: Copies files from the VM to ADLS.
+  - Databricks Activity: Processes data for incremental ingestion into a notebook.
+  - Web Activity: Integrates with Azure Logic Apps to send email notifications upon successful or failed pipeline runs.
 ### Azure Data Lake Storage Gen2 (ADLS)
 - Purpose: Stores the log files and acts as the primary data lake.
 ### Databricks
 - Mounting ADLS: Uses a service principal to mount the ADLS folder, managed by DBFS.
 - Data Processing: Processes and ingests log files into the bronze layer for further analysis.
+- Multi-Hop Architecture: 
+  - Bronze Layer: Raw data ingestion from ADLS.
+    - Purpose: Capture raw log files and store them in a Delta table for incremental ingestion.
+    - Process: Incremental ingestion using COPY INTO, a command that loads data from ADLS into the Delta table. The command utilizes metadata to track ingested files, ensuring that only new files are ingested.
+  - Silver Layer: Cleansed and enriched data.
+    - Purpose: Transform raw data into a structured format, applying business logic and data quality checks.
+    - Process: Deduplication, filtering, and other transformations of the raw data.
+  - Gold Layer: Aggregated and ready-for-analysis data.
+    - Purpose: Finalize data for consumption by analytics and reporting tools.
+    - Process: Aggregation and creation of curated Delta tables for specific reporting needs.
+  - Visualization
+    - Equity Curve Time Series: Finalized Delta table in the Gold Layer used for simple visualizations to plot equity curves.
 ### Azure Logic App
 - Notification: Sends email notifications upon successful or failed ADF pipeline runs.
 - Integration: Uses a web activity in ADF to trigger the Logic App.
+- reference:
+  - [Copy data and send email notifications on success and failure | Microsoft Learn](https://learn.microsoft.com/en-us/azure/data-factory/tutorial-control-flow-portal)
+  - [Send an email with an Azure Data Factory or Azure Synapse pipeline | Microsoft Learn](https://learn.microsoft.com/en-us/azure/data-factory/tutorial-control-flow-portal)
