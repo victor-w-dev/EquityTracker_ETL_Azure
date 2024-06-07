@@ -170,7 +170,8 @@
     <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/plot.PNG" width="50%" height="50%"><br>
 ### Azure Logic App
 - **Notification:** Sends email notifications upon successful or failed ADF Pipeline runs.
-- **Integration:** Uses a web activity in ADF to trigger the Logic App.
+- **Integration:** Uses a web activity in ADF to trigger the Logic App.<br>
+  <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/logic_app_setting.PNG" width="70%" height="70%"><br>
   - reference:
     - [Copy data and send email notifications on success and failure | Microsoft Learn](https://learn.microsoft.com/en-us/azure/data-factory/tutorial-control-flow-portal)
     - [Send an email with an Azure Data Factory or Azure Synapse Pipeline | Microsoft Learn](https://learn.microsoft.com/en-us/azure/data-factory/how-to-send-email)
