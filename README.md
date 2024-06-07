@@ -24,17 +24,16 @@ What we’ll cover:
 - Log Generation: Generates log files for daily equity tracking reports, saved in a folder on the VM. Log files are named by date (e.g., 20240601.log).
 - Log Frequency: Four new log files are created daily at UTC 00:00, corresponding to different equity tracking strategies. <br>
 - Integration Runtime Setup for connection with ADF:
-  Step 1: Create a Self-hosted Integration Runtime in Azure Data Factory.
-  Step 2: Download and install the Integration Runtime on the Azure VM.
-  Step 3: Configure the Integration Runtime to connect to Azure Data Factory using the provided key.
-  Step 4: Verify the setup by testing the connection between the Integration Runtime and Azure Data Factory.
+  - Step 1: Create a Self-hosted Integration Runtime in Azure Data Factory.
+  - Step 2: Download and install the Integration Runtime on the Azure VM.
+  - Step 3: Configure the Integration Runtime to connect to Azure Data Factory using the provided key.
+  - Step 4: Verify the setup by testing the connection between the Integration Runtime and Azure Data Factory.
   - reference: [Create a self-hosted integration runtime - Azure Data Factory & Azure Synapse | Microsoft Learn](https://learn.microsoft.com/en-us/azure/data-factory/create-self-hosted-integration-runtime?tabs=data-factory)
 ### Azure Data Factory (ADF)
 - Integration Runtime: Connects to the VM, ADLS, and Databricks.
 - Pipeline: Automates the process of copying log files from the VM to ADLS.
 - Step 1: Copy files from the VM to ADLS.
 - Step 2: Databricks activity for incremental ingestion into a bronze layer.
-- Incremental Ingestion: Uses COPY INTO to identify and ingest only new files, ensuring efficiency.
 - Monitoring and Notification: Integrates with Azure Logic Apps to send email notifications upon successful or failed pipeline runs.
 ### Azure Data Lake Storage Gen2 (ADLS)
 - Purpose: Stores the log files and acts as the primary data lake.
