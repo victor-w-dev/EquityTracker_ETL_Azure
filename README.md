@@ -28,6 +28,7 @@ What we’ll cover:
   Step 2: Download and install the Integration Runtime on the Azure VM.
   Step 3: Configure the Integration Runtime to connect to Azure Data Factory using the provided key.
   Step 4: Verify the setup by testing the connection between the Integration Runtime and Azure Data Factory.
+  - reference: [Create a self-hosted integration runtime - Azure Data Factory & Azure Synapse | Microsoft Learn](https://learn.microsoft.com/en-us/azure/data-factory/create-self-hosted-integration-runtime?tabs=data-factory)
 ### Azure Data Factory (ADF)
 - Integration Runtime: Connects to the VM, ADLS, and Databricks.
 - Pipeline: Automates the process of copying log files from the VM to ADLS.
