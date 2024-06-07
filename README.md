@@ -9,6 +9,7 @@ What we’ll cover:
 - Step 2: Run a Databricks Notebook with an activity set in the ADF Pipeline, transform extracted log file data.
 - Step 3: Through the Multi-hop architecture approach, Databricks finalized a delta table for simple visulization for equity tracking.
 - Step 4: Set a Web activity leveraging Azure Logic Apps to send email, noticing the Pipeline run successfully or fail
+
 <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/project_architecture.PNG" width="90%" height="90%"><br>
 ## ADF Pipeline Setup:
 <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/adf_pipeline_structure.PNG" width="90%" height="90%"><br>
@@ -55,6 +56,10 @@ What we’ll cover:
 - Purpose: Stores the log files and acts as the primary data lake.
 ### Databricks
 - Mounting ADLS: Uses a service principal to mount the ADLS folder, managed by DBFS.
+- reference:
+  - [Connect to Azure Data Lake Storage Gen2 or Blob Storage using Azure credentials | Microsoft Learn](https://learn.microsoft.com/en-us/azure/databricks/connect/storage/azure-storage#--connect-to-azure-data-lake-storage-gen2-or-blob-storage-using-azure-credentials)
+  - [Access storage using a service principal & Microsoft Entra ID(Azure Active Directory | Microsoft Learn](https://learn.microsoft.com/en-us/azure/databricks/connect/storage/aad-storage-service-principal)
+  
 - Data Processing: Processes and ingests log files into the bronze layer for further analysis.
 - Multi-Hop Architecture: 
   - Bronze Layer: Raw data ingestion from ADLS.
