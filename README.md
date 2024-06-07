@@ -10,7 +10,7 @@ What we’ll cover:
 - Step 3: Through the Multi-hop architecture approach, Databricks finalized a delta table for simple visulization for equity tracking.
 - Step 4: Set a Web activity leveraging Azure Logic Apps to send email, noticing the Pipeline run successfully or fail
 <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/project_architecture.PNG" width="90%" height="90%"><br>
-- ADF Pipeline Setup:
+## ADF Pipeline Setup:
 <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/adf_pipeline_structure.PNG" width="90%" height="90%"><br>
 
 ## Prerequisites
@@ -46,7 +46,7 @@ What we’ll cover:
     <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/adf_linked_services.PNG" width="50%" height="50%"><br>
 - Integration Runtime: Connects to the VM, ADLS, and Databricks.<br>
   <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/adf_IR.PNG" width="50%" height="50%"><br>
-- [Pipeline Setup][ADF Pipeline Setup]: Automates the process of copying and transforming log files.
+- [Pipeline Setup](#ADF-Pipeline-Setup): Automates the process of copying and transforming log files.
   - Copy Activity: Copies files from the VM to ADLS.
   - Databricks Activity: Processes data for incremental ingestion into a notebook.
   - Web Activity: Integrates with Azure Logic Apps to send email notifications upon successful or failed pipeline runs.
