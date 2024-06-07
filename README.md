@@ -1,17 +1,22 @@
-[ADF Pipeline Setup]: #adf-pipeline-setup "ADF Pipeline Setup"
+[ADF Pipeline Setup]: #adf-Pipeline-setup "ADF Pipeline Setup"
+# Azure Equity Tracking Pipeline
 
 ## Project Overview
-- This project demonstrates an equity tracking system, leveraging Azure Data Factory ETL pipeline to load trading activity log data incrementally from Azure VM through Azure Data Lake Storage (ADLS) Gen2 to DataBricks Lakehouse Platform, using Azure Logic Apps for email notification.
-- Additionally, it calculates and displays the total asset amount in the trading accounts on a daily basis.
+- This project demonstrates an equity tracking system, leveraging Azure Data Factory ETL Pipeline to load trading activity log data incrementally from Azure Virtual Machine (VM) through Azure Data Lake Storage (ADLS) Gen2 to DataBricks Lakehouse Platform, using Azure Logic Apps for email notification.
+- Additionally, it calculates and displays the total equity amount in different trading accounts on a daily basis.
 
 ## Architecture
-What we’ll cover:
-- Step 1: Create an ADF Pipeline to use Copy Activity to copy log files from the VM to ADLS container enabled with Hierarchical Namespace.
-- Step 2: Run a Databricks Notebook with an activity set in the ADF Pipeline, transform extracted log file data.
-- Step 3: Through the Multi-hop architecture approach, Databricks finalized a delta table for simple visulization for equity tracking.
-- Step 4: Set a Web activity leveraging Azure Logic Apps to send email, noticing the Pipeline run successfully or fail
-
 <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/project_architecture.PNG" width="90%" height="90%"><br>
+- **Data Source:**
+  - The VM hosts a trading bot that performs algorithmic trading across 4 different accounts. 
+  - It generates log files recording trading activities and daily equity data. While this demo focuses on the equity tracking Pipeline, it does not delve into the specifics of the trading bot and its operations.
+
+- What will cover:
+  - **Step 1:** Create an ADF Pipeline to use Copy Activity to copy log files from the VM to ADLS container enabled with Hierarchical Namespace.
+  - **Step 2:** Run a Databricks Notebook with an activity set in the ADF Pipeline, transform extracted log file data.
+  - **Step 3:** Through the Multi-hop architecture approach, Databricks finalized a delta table for simple visulization for equity tracking.
+  - **Step 4:** Set a Web activity leveraging Azure Logic Apps to send email, noticing whether the Pipeline run successfully or fail
+
 ## ADF Pipeline Setup:
 <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/adf_pipeline_structure.PNG" width="90%" height="90%"><br>
 
@@ -25,12 +30,12 @@ What we’ll cover:
 <!--te-->
 
 ### Azure Virtual Machine (VM)
-- Purpose: Hosts the data collection and processing application.
-- Log Generation: Generates log files for daily equity tracking reports, saved in 4 folders on the VM. Log files are named by date (e.g., 20240606.log).<br>
-<img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/vm_log_folders.PNG" width="60%" height="60%"><br>
-<img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/vm_logs.PNG" width="60%" height="60%"><br>
-- Log Frequency: 4 new log files are created daily at UTC 00:00, corresponding to 4 different trading account.<br>
-- Integration Runtime Setup for connection with ADF:
+- **Log Generation:** Generates log files for recording trading activity, including daily equity amount, saved in 4 folders on the VM. Log files are named by date (e.g., 20240606.log).<br>
+<img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/vm_log_folders.PNG" width="75%" height="75%"><br>
+<img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/vm_logs.PNG" width="75%" height="75%"><br>
+- **Log Frequency:** 4 new log files are created daily at UTC time 00:00, corresponding to 4 different trading account.<br>
+- **Information:** Each log file contains a row with text information recording the account's equity amount.
+- **Integration Runtime Setup for connection with ADF:**
   - Step 1: Create a Self-hosted Integration Runtime in Azure Data Factory.
   - Step 2: Download and install the Integration Runtime on the Azure VM.
   - Step 3: Configure the Integration Runtime to connect to Azure Data Factory using the provided key.
@@ -38,38 +43,41 @@ What we’ll cover:
   - reference: 
     - [Create a self-hosted integration runtime - Azure Data Factory & Azure Synapse | Microsoft Learn](https://learn.microsoft.com/en-us/azure/data-factory/create-self-hosted-integration-runtime?tabs=data-factory)
 ### Azure Data Factory (ADF)
-- Dataset and Linked Services Setup:
-  - Datasets: Define the structure of data to be used in the pipeline.
+- **Dataset and Linked Services Setup:**
+  - **Datasets:** Define the structure of data to be used in the Pipeline.
     - VM Dataset: Represents log files stored on the VM.
     - ADLS Dataset: Represents log files stored in ADLS.<br>
     <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/adf_dataset.PNG" width="30%" height="30%"><br>
-  - Linked Services: Configure connections to the VM, ADLS, and Databricks.
+  - **Linked Services:** Configure connections to the VM, ADLS, and Databricks.
     - VM Linked Service: Connects ADF to the Azure VM.
     - ADLS Linked Service: Connects ADF to Azure Data Lake Storage.
     - Databricks Linked Service: Connects ADF to Databricks.<br>
     <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/adf_linked_services.PNG" width="50%" height="50%"><br>
-- Integration Runtime: Connects to the VM, ADLS, and Databricks.<br>
+- **Integration Runtime:** Connects to the VM, ADLS, and Databricks.<br>
   <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/adf_IR.PNG" width="50%" height="50%"><br>
-- [Pipeline Setup](#ADF-Pipeline-Setup): Automates the process of copying and transforming log files.
+- **[Pipeline Setup](#ADF-Pipeline-Setup):** Automates the process of copying and transforming log files.
   - Copy Activity: Copies files from the VM to ADLS.
   - Databricks Activity: Processes data for incremental ingestion into a notebook.
-  - Web Activity: Integrates with Azure Logic Apps to send email notifications upon successful or failed pipeline runs.
-  
+  - Web Activity: Integrates with Azure Logic Apps to send email notifications upon successful or failed Pipeline runs.
+- **Trigger:**
+  - Use scheduled trigger to start the pipeline at UTC time 00:10 every day
 ### Azure Data Lake Storage Gen2 (ADLS)
-- Purpose: Stores the log files and acts as the primary data lake.
-- Storing Location: log files are stored in a hierarchical structure from low cardinality to high cardinality (account/year/month).
-  <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/adls.PNG" width="50%" height="50%"><br>
+- **Purpose:** Stores the log files and acts as the primary data lake.
+- **Storing Location:** log files are stored in a hierarchical structure from low cardinality to high cardinality (account/year/month).
+  <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/adls.PNG" width="70%" height="70%"><br>
 ### Databricks
-- Mounting ADLS: Uses a service principal to mount the ADLS folder, managed by DBFS.
+- **Notebook:** refer to 
+- **Mounting ADLS:** Uses a service principal to mount the ADLS folder, managed by Databricks File System (DBFS).
   - reference:
     - [Connect to Azure Data Lake Storage Gen2 or Blob Storage using Azure credentials | Microsoft Learn](https://learn.microsoft.com/en-us/azure/databricks/connect/storage/azure-storage#--connect-to-azure-data-lake-storage-gen2-or-blob-storage-using-azure-credentials)
     - [Access storage using a service principal & Microsoft Entra ID(Azure Active Directory | Microsoft Learn](https://learn.microsoft.com/en-us/azure/databricks/connect/storage/aad-storage-service-principal)
-  
-- Data Processing: Processes and ingests log files into the bronze layer for further analysis.
-- Multi-Hop Architecture: 
+- **Data Processing:** Processes and ingests log files into the bronze layer for further analysis.
+- **Multi-Hop Architecture:**
   - Bronze Layer: Raw data ingestion from ADLS.
     - Purpose: Capture raw log files and store them in a Delta table for incremental ingestion.
-    - Process: Incremental ingestion using COPY INTO, a command that loads data from ADLS into the Delta table. The command utilizes metadata to track ingested files, ensuring that only new files are ingested.
+    - Process:
+      - The Bronze layer uses the `COPY INTO` command for batch data processing. This command is chosen over Spark Streaming due to the cost-effectiveness in handling batch data, as real-time data streaming can be costly and unnecessary for this use case.
+      - **COPY INTO Command:** a command that loads data from ADLS into the Delta table. The command utilizes metadata to track ingested files, ensuring that only new files are ingested so as to prevent duplication and ensures efficient data processing.
     ```SQL
     %sql
     CREATE TABLE IF NOT EXISTS logging_raw(
@@ -161,8 +169,8 @@ What we’ll cover:
     ```
     <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/plot.PNG" width="50%" height="50%"><br>
 ### Azure Logic App
-- Notification: Sends email notifications upon successful or failed ADF pipeline runs.
-- Integration: Uses a web activity in ADF to trigger the Logic App.
-- reference:
-  - [Copy data and send email notifications on success and failure | Microsoft Learn](https://learn.microsoft.com/en-us/azure/data-factory/tutorial-control-flow-portal)
-  - [Send an email with an Azure Data Factory or Azure Synapse pipeline | Microsoft Learn](https://learn.microsoft.com/en-us/azure/data-factory/how-to-send-email)
+- **Notification:** Sends email notifications upon successful or failed ADF Pipeline runs.
+- **Integration:** Uses a web activity in ADF to trigger the Logic App.
+  - reference:
+    - [Copy data and send email notifications on success and failure | Microsoft Learn](https://learn.microsoft.com/en-us/azure/data-factory/tutorial-control-flow-portal)
+    - [Send an email with an Azure Data Factory or Azure Synapse Pipeline | Microsoft Learn](https://learn.microsoft.com/en-us/azure/data-factory/how-to-send-email)
