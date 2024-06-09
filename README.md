@@ -53,6 +53,7 @@
     - ADLS Linked Service: Connects ADF to Azure Data Lake Storage.
     - Databricks Linked Service: Connects ADF to Databricks.<br>
     <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/adf_linked_services.PNG" width="50%" height="50%"><br>
+  - Dynamic content to copy the lastest log file
 - **Integration Runtime:** Connects to the VM, ADLS, and Databricks.<br>
   <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/adf_IR.PNG" width="50%" height="50%"><br>
 - **[Pipeline Setup](#ADF-Pipeline-Setup):** Automates the process of copying and transforming log files.
@@ -179,6 +180,7 @@
 ### Azure Logic App
 - **Notification:** Sends email notifications upon successful or failed ADF Pipeline runs.
 - **Integration:** Uses a web activity in ADF to trigger the Logic App.<br>
+  <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/pipeline_parameter.PNG" width="70%" height="70%"><br>
   <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/logic_app_setting.PNG" width="70%" height="70%"><br>
   - reference:
     - [Copy data and send email notifications on success and failure | Microsoft Learn](https://learn.microsoft.com/en-us/azure/data-factory/tutorial-control-flow-portal)
