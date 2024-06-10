@@ -53,7 +53,11 @@
     - ADLS Linked Service: Connects ADF to Azure Data Lake Storage.
     - Databricks Linked Service: Connects ADF to Databricks.<br>
     <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/adf_linked_services.PNG" width="50%" height="50%"><br>
-  - Dynamic content to copy the lastest log file
+  - **Dynamic content to copy the lastest log file:**<br>
+    ```
+    @concat(formatDateTime(addDays(utcNow(), -1),'yyyyMMdd'),'.log')
+    ```
+    <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/adf_dataset_dynamic_content.PNG" width="50%" height="50%"><br>
 - **Integration Runtime:** Connects to the VM, ADLS, and Databricks.<br>
   <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/adf_IR.PNG" width="50%" height="50%"><br>
 - **[Pipeline Setup](#ADF-Pipeline-Setup):** Automates the process of copying and transforming log files.
@@ -69,8 +73,7 @@
   <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/adls.PNG" width="70%" height="70%"><br>
 ### Databricks
 - **Notebook:** refer to:
-  - recommend to download the html and drag to browser to view as it can retains Databrick format style: 
-    - [demo_equitytracking_notebook(.html)](https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/demo_equitytracking_notebook.html)<br>
+    - [demo_equitytracking_notebook(.html)](https://raw.githack.com/victor-w-dev/EquityTracker_ETL_Azure/main/demo_equitytracking_notebook.html)<br>
     <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/databrick_html_view.PNG" width="35%" height="35%"><br>
   - [demo_equitytracking_notebook(.ipynb)](https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/demo_equitytracking_notebook.ipynb) 
 - **Mounting ADLS:** Uses a service principal to mount the ADLS folder, managed by Databricks File System (DBFS).
