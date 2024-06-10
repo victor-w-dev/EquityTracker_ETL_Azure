@@ -3,8 +3,9 @@
 
 ## Project Overview
 - This project demonstrates an equity tracking system, leveraging Azure Data Factory ETL Pipeline to load trading activity log data incrementally from Azure Virtual Machine (VM) through Azure Data Lake Storage (ADLS) Gen2 to DataBricks Lakehouse Platform, using Azure Logic Apps for email notification.
-- Additionally, it calculates and displays the total equity amount in different trading accounts on a daily basis.
-<img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/overview.PNG" width="100%" height="100%"><br>
+- Additionally, it calculates and displays the total equity amount in different trading accounts on a daily basis.<br>
+
+<img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/overview.PNG" width="120%" height="120%"><br>
 
 ## Architecture
 <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/project_architecture.PNG" width="90%" height="90%"><br>
