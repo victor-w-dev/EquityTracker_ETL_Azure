@@ -75,8 +75,8 @@
   <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/adls.PNG" width="70%" height="70%"><br>
 ### Databricks
 - **Notebook:** refer to:
-    - Click to open the notebook in web page: [demo_equitytracking_notebook(.html)](https://raw.githack.com/victor-w-dev/EquityTracker_ETL_Azure/main/demo_equitytracking_notebook.html)<br>
-  - [demo_equitytracking_notebook(.ipynb)](https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/demo_equitytracking_notebook.ipynb) 
+    - Click to open the notebook in web page: [demo_equitytracking_databricks_notebook(.html)](https://raw.githack.com/victor-w-dev/EquityTracker_ETL_Azure/main/demo_equitytracking_databricks_notebook.html)<br>
+  - [demo_equitytracking_databricks_notebook(.ipynb)](https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/demo_equitytracking_databricks_notebook.ipynb) 
 - **Mounting ADLS:** Uses a service principal to mount the ADLS folder, managed by Databricks File System (DBFS).
   - reference:
     - [Connect to Azure Data Lake Storage Gen2 or Blob Storage using Azure credentials | Microsoft Learn](https://learn.microsoft.com/en-us/azure/databricks/connect/storage/azure-storage#--connect-to-azure-data-lake-storage-gen2-or-blob-storage-using-azure-credentials)
