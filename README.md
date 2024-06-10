@@ -53,7 +53,11 @@
     - ADLS Linked Service: Connects ADF to Azure Data Lake Storage.
     - Databricks Linked Service: Connects ADF to Databricks.<br>
     <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/adf_linked_services.PNG" width="50%" height="50%"><br>
-  - Dynamic content to copy the lastest log file
+  - **Dynamic content to copy the lastest log file:**<br>
+    ```
+    @concat(formatDateTime(addDays(utcNow(), -1),'yyyyMMdd'),'.log')
+    ```
+    <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/adf_dataset_dynamic_content.PNG" width="50%" height="50%"><br>
 - **Integration Runtime:** Connects to the VM, ADLS, and Databricks.<br>
   <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/adf_IR.PNG" width="50%" height="50%"><br>
 - **[Pipeline Setup](#ADF-Pipeline-Setup):** Automates the process of copying and transforming log files.
