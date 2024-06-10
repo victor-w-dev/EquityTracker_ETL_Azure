@@ -4,6 +4,7 @@
 ## Project Overview
 - This project demonstrates an equity tracking system, leveraging Azure Data Factory ETL Pipeline to load trading activity log data incrementally from Azure Virtual Machine (VM) through Azure Data Lake Storage (ADLS) Gen2 to DataBricks Lakehouse Platform, using Azure Logic Apps for email notification.
 - Additionally, it calculates and displays the total equity amount in different trading accounts on a daily basis.
+<img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/overview.PNG" width="100%" height="100%"><br>
 
 ## Architecture
 <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/project_architecture.PNG" width="90%" height="90%"><br>
@@ -73,8 +74,7 @@
   <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/adls.PNG" width="70%" height="70%"><br>
 ### Databricks
 - **Notebook:** refer to:
-    - [demo_equitytracking_notebook(.html)](https://raw.githack.com/victor-w-dev/EquityTracker_ETL_Azure/main/demo_equitytracking_notebook.html)<br>
-    <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/databrick_html_view.PNG" width="35%" height="35%"><br>
+    - Click to open the notebook in web page: [demo_equitytracking_notebook(.html)](https://raw.githack.com/victor-w-dev/EquityTracker_ETL_Azure/main/demo_equitytracking_notebook.html)<br>
   - [demo_equitytracking_notebook(.ipynb)](https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/demo_equitytracking_notebook.ipynb) 
 - **Mounting ADLS:** Uses a service principal to mount the ADLS folder, managed by Databricks File System (DBFS).
   - reference:
