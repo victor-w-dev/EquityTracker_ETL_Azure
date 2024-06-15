@@ -5,10 +5,10 @@
 - This project demonstrates an equity tracking system, leveraging Azure Data Factory ETL Pipeline to load trading activity log data incrementally from Azure Virtual Machine (VM) through Azure Data Lake Storage (ADLS) Gen2 to DataBricks Lakehouse Platform, using Azure Logic Apps for email notification.
 - Additionally, it calculates and displays the total equity amount in different trading accounts on a daily basis.<br>
 
-<img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/overview.PNG" width="120%" height="120%"><br>
+<img src="./img/overview.PNG" width="120%" height="120%"><br>
 
 ## Architecture
-<img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/project_architecture.PNG" width="90%" height="90%"><br>
+<img src="./img/project_architecture.PNG" width="90%" height="90%"><br>
 - **Data Source:**
   - The VM hosts a trading bot that performs algorithmic trading across 4 different accounts. 
   - It generates log files recording trading activities and daily equity data. While this demo focuses on the equity tracking Pipeline, it does not delve into the specifics of the trading bot and its operations.
@@ -20,7 +20,7 @@
   - **Step 4:** Set a Web activity leveraging Azure Logic Apps to send email, noticing whether the Pipeline run successfully or fail
 
 ## ADF Pipeline Setup:
-<img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/adf_pipeline_structure.PNG" width="90%" height="90%"><br>
+<img src="./img/adf_pipeline_structure.PNG" width="90%" height="90%"><br>
 
 ## Prerequisites
 <!--ts-->
@@ -33,8 +33,8 @@
 
 ### Azure Virtual Machine (VM)
 - **Log Generation:** Generates log files for recording trading activity, including daily equity amount, saved in 4 folders on the VM. Log files are named by date (e.g., 20240606.log).<br>
-<img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/vm_log_folders.PNG" width="75%" height="75%"><br>
-<img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/vm_logs.PNG" width="75%" height="75%"><br>
+<img src="./img/vm_log_folders.PNG" width="75%" height="75%"><br>
+<img src="./img/vm_logs.PNG" width="75%" height="75%"><br>
 - **Log Frequency:** 4 new log files are created daily at UTC time 00:00, corresponding to 4 different trading account.<br>
 - **Information:** Each log file contains a row with text information recording the account's equity amount.
 - **Integration Runtime Setup for connection with ADF:**
@@ -49,34 +49,34 @@
   - **Datasets:** Define the structure of data to be used in the Pipeline.
     - VM Dataset: Represents log files stored on the VM.
     - ADLS Dataset: Represents log files stored in ADLS.<br>
-    <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/adf_dataset.PNG" width="30%" height="30%"><br>
+    <img src="./main/img/adf_dataset.PNG" width="30%" height="30%"><br>
   - **Linked Services:** Configure connections to the VM, ADLS, and Databricks.
     - VM Linked Service: Connects ADF to the Azure VM.
     - ADLS Linked Service: Connects ADF to Azure Data Lake Storage.
     - Databricks Linked Service: Connects ADF to Databricks.<br>
-    <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/adf_linked_services.PNG" width="50%" height="50%"><br>
+    <img src="./img/adf_linked_services.PNG" width="50%" height="50%"><br>
   - **Dynamic content to copy the lastest log file:**<br>
     ```
     @concat(formatDateTime(addDays(utcNow(), -1),'yyyyMMdd'),'.log')
     ```
-    <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/adf_dataset_dynamic_content.PNG" width="50%" height="50%"><br>
+    <img src="./img/adf_dataset_dynamic_content.PNG" width="50%" height="50%"><br>
 - **Integration Runtime:** Connects to the VM, ADLS, and Databricks.<br>
-  <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/adf_IR.PNG" width="50%" height="50%"><br>
+  <img src="./img/adf_IR.PNG" width="50%" height="50%"><br>
 - **[Pipeline Setup](#ADF-Pipeline-Setup):** Automates the process of copying and transforming log files.
   - Copy Activity: Copies files from the VM to ADLS.
   - Databricks Activity: Processes data for incremental ingestion into a notebook.
   - Web Activity: Integrates with Azure Logic Apps to send email notifications upon successful or failed Pipeline runs.
 - **Trigger:**
   - Use scheduled trigger to start the pipeline at UTC time 00:10 every day<br>
-  <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/adf_triggers.PNG" width="35%" height="35%"><br>
+  <img src="./img/adf_triggers.PNG" width="35%" height="35%"><br>
 ### Azure Data Lake Storage Gen2 (ADLS)
 - **Purpose:** Stores the log files and acts as the primary data lake.
 - **Storing Location:** log files are stored in a hierarchical structure from low cardinality to high cardinality (path: account/year/month).<br>
-  <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/adls.PNG" width="70%" height="70%"><br>
+  <img src="./img/adls.PNG" width="70%" height="70%"><br>
 ### Databricks
 - **Notebook:** refer to:
     - Click to open the notebook in web page: [demo_equitytracking_databricks_notebook(.html)](https://raw.githack.com/victor-w-dev/EquityTracker_ETL_Azure/main/demo_equitytracking_databricks_notebook.html)<br>
-  - [demo_equitytracking_databricks_notebook(.ipynb)](https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/demo_equitytracking_databricks_notebook.ipynb) 
+  - [demo_equitytracking_databricks_notebook(.ipynb)](./demo_equitytracking_databricks_notebook.ipynb) 
 - **Mounting ADLS:** Uses a service principal to mount the ADLS folder, managed by Databricks File System (DBFS).
   - reference:
     - [Connect to Azure Data Lake Storage Gen2 or Blob Storage using Azure credentials | Microsoft Learn](https://learn.microsoft.com/en-us/azure/databricks/connect/storage/azure-storage#--connect-to-azure-data-lake-storage-gen2-or-blob-storage-using-azure-credentials)
@@ -177,15 +177,15 @@
     FROM equity_time_series
     WHERE date_end >= '2024-05-09'
     ```
-    <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/plot.PNG" width="50%" height="50%"><br>
+    <img src="./img/plot.PNG" width="50%" height="50%"><br>
 - **DBFS:**
   - The delta tables created previously will be managed under DBFS<br>
-  <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/dbfs.PNG" width="60%" height="60%"><br>   
+  <img src="./img/dbfs.PNG" width="60%" height="60%"><br>   
 ### Azure Logic App
 - **Notification:** Sends email notifications upon successful or failed ADF Pipeline runs.
 - **Integration:** Uses a web activity in ADF to trigger the Logic App.<br>
-  <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/pipeline_parameter.PNG" width="70%" height="70%"><br>
-  <img src="https://github.com/victor-w-dev/EquityTracker_ETL_Azure/blob/main/img/logic_app_setting.PNG" width="70%" height="70%"><br>
+  <img src="./img/pipeline_parameter.PNG" width="70%" height="70%"><br>
+  <img src="./img/logic_app_setting.PNG" width="70%" height="70%"><br>
   - reference:
     - [Copy data and send email notifications on success and failure | Microsoft Learn](https://learn.microsoft.com/en-us/azure/data-factory/tutorial-control-flow-portal)
     - [Send an email with an Azure Data Factory or Azure Synapse Pipeline | Microsoft Learn](https://learn.microsoft.com/en-us/azure/data-factory/how-to-send-email)
