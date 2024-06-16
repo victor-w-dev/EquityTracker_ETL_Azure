@@ -49,7 +49,7 @@
   - **Datasets:** Define the structure of data to be used in the Pipeline.
     - VM Dataset: Represents log files stored on the VM.
     - ADLS Dataset: Represents log files stored in ADLS.<br>
-    <img src="./main/img/adf_dataset.PNG" width="30%" height="30%"><br>
+    <img src="./img/adf_dataset.PNG" width="30%" height="30%"><br>
   - **Linked Services:** Configure connections to the VM, ADLS, and Databricks.
     - VM Linked Service: Connects ADF to the Azure VM.
     - ADLS Linked Service: Connects ADF to Azure Data Lake Storage.
