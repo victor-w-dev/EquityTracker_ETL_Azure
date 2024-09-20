@@ -1,5 +1,5 @@
 [ADF Pipeline Setup]: #adf-Pipeline-setup "ADF Pipeline Setup"
-# Azure Equity Tracking Pipeline
+# Azure Equity Tracking ETL Pipeline
 
 ## Project Overview
 - This project demonstrates an equity tracking system, leveraging Azure Data Factory ETL Pipeline to load trading activity log data incrementally from Azure Virtual Machine (VM) through Azure Data Lake Storage (ADLS) Gen2 to DataBricks Lakehouse Platform, using Azure Logic Apps for email notification.
